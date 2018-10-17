@@ -2,7 +2,7 @@
 /*
 * Plugin Name: Yotpo Shortcodes for WooCommerce
 * Description: This plugin adds the ability to use shortcodes to control the placement of Yotpo widgets.
-* Version: 1.0
+* Version: 1.0.1
 * Author: Paul Glushak
 * Author URI: http://paulglushak.com/
 * Plugin URI: http://paulglushak.com/yotpo-shortcodes-for-woocommerce/
@@ -34,7 +34,7 @@ function wc_place_yotpo_product_gallery( $args ) {
 	basic_check();
 	if ( empty( $args['gallery_id'] ) ) { return 'Error - no gallery ID specified'; }
 	$html = '<div class="yotpo yotpo-pictures-widget" data-gallery-id="' . $args['gallery_id'] . '"';
-	if ( is_product() ) {
+	if ( ( !isset($args[0]) || $args[0] != 'noproduct' ) && is_product() ) {
 		global $product;
 		$html .= 'data-product-id="' . $product->get_id() . '"';
 	}
@@ -62,11 +62,13 @@ function wc_place_yotpo_product_reviews_carousel( $args ) {
 		 data-autoplay-enabled="' . $autoplay_enabled . '" 
 		 data-autoplay-speed="' . $autoplay_speed . '" 
 		 data-show-navigation="' . $show_navigation . '"';
-	if ( is_product() ) {
+	if ( isset( $args['product_id'] ) ) {
+		$html .= 'data-product-id="' . $args['product_id'] . '"';
+	} elseif ( isset($args[0]) && $args[0] == 'noproduct' ) {
+		$html .= '';
+	} elseif ( is_product() ) {
 		global $product;
 		$html .= 'data-product-id="' . $product->get_id() . '"';
-	} elseif ($args['product_id']) {
-		$html .= 'data-product-id="' . $args['product_id'] . '"';
 	}
 	$html .= '></div>';
 	return $html;
