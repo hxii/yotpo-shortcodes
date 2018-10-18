@@ -1,6 +1,6 @@
 <?php
 /*
-* Plugin Name: Yotpo Shortcodes for WooCommerce
+* Plugin Name: Shortcodes for Yotpo
 * Description: This plugin adds the ability to use shortcodes to control the placement of Yotpo widgets.
 * Version: 1.0.1
 * Author: Paul Glushak

@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Shortcodes for Yotpo ===
 Contributors: hxii
 Tags: yotpo, shortcode, shortcodes, yotpo add-on
 Requires at least: 4.6
